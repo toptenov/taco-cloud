@@ -5,11 +5,18 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.CreditCardNumber;
 import java.util.List;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
+
 import lombok.Data;
 
 @Data
-public class TacoOrder {
+public class TacoOrder implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+    private Long id;
+    private Date placedAt;
 
     @NotBlank(message="Delivery name is required")
     private String deliveryName;
