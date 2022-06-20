@@ -21,21 +21,16 @@ public class OrderController {
     private OrderRepository orderRepo;
 
     public OrderController(OrderRepository orderRepo) {
-
         this.orderRepo = orderRepo;
-
     }
 
     @GetMapping("/current")
     public String orderForm() {
-
         return "orderForm";
-
     }
 
     @PostMapping
     public String processOrder(@Valid TacoOrder order, Errors errors, SessionStatus sessionStatus) {
-
         if (errors.hasErrors()) {
             return "orderForm";
         }
@@ -44,7 +39,6 @@ public class OrderController {
         sessionStatus.setComplete();
 
         return "redirect:/";
-
     }
 
 }

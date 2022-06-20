@@ -10,6 +10,7 @@ import tacos.data.IngredientRepository;
 
 @SpringBootApplication
 public class TacoCloudApplication {
+	
 	public static void main(String[] args) {
 		SpringApplication.run(TacoCloudApplication.class, args);
 	}
@@ -29,4 +30,5 @@ public class TacoCloudApplication {
 			repo.save(new Ingredient("SRCR", "Sour Cream", Type.SAUCE));
 		};
 	}
+
 }
