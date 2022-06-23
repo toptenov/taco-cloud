@@ -64,6 +64,14 @@
             <button>Submit Your Taco</button>
         </div>
 
+    </form><br/>
+
+    <form method="GET" th:action="@{/login}">
+        <input type="submit" value="Log in"/>
+    </form><br>
+
+    <form method="POST" th:action="@{/logout}">
+        <input type="submit" value="Log out"/>
     </form>
 
 </body>
