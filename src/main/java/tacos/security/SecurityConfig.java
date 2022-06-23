@@ -54,14 +54,16 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
-        .cors().disable()
-        .csrf().disable()
         .authorizeRequests()
         .antMatchers("/design", "/orders").access("hasRole('USER')")
         .and()
         .formLogin().loginPage("/login").defaultSuccessUrl("/design", true)
         .and()
         .logout().logoutSuccessUrl("/")
+        .and()
+        .csrf().ignoringAntMatchers("/h2-console/**")
+        .and()  
+        .headers().frameOptions().sameOrigin()
         .and()
         .build();
     }
