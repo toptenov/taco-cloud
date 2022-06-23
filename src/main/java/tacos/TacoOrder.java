@@ -10,7 +10,6 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.CreditCardNumber;
-import org.springframework.data.relational.core.mapping.Column;
 
 import java.util.List;
 import java.io.Serializable;
@@ -31,7 +30,6 @@ public class TacoOrder implements Serializable {
 
     private Date placedAt= new Date();
 
-    @Column("delivery_name")  // Custom name for DB-table column
     @NotBlank(message="Delivery name is required")
     private String deliveryName;
 
