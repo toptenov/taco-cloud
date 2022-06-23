@@ -3,6 +3,7 @@ package tacos.web;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -56,11 +57,13 @@ public class DesignTacoController {
     }
 
     @GetMapping
+    @PostAuthorize("hasRole('USER')")
     public String showDesignForm() {
         return "design";
     }
 
     @PostMapping
+    @PostAuthorize("hasRole('USER')")
     public String processTaco(@Valid Taco taco, Errors errors, @ModelAttribute TacoOrder tacoOrder) {
         if (errors.hasErrors()) {
             return "design";
