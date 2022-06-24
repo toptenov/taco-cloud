@@ -4,6 +4,14 @@ spring:
         name: tacocloud
     thymeleaf:
         cache: false
-    
     jpa:
         open-in-view: false
+logging:
+    file:
+        path: ./logs/
+        file: TacoCloud.log
+    level:
+        root: INFO
+        org:
+            springframework:
+                security: DEBUG
