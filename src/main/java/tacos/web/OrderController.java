@@ -2,7 +2,6 @@ package tacos.web;
 
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PostAuthorize;
@@ -27,17 +26,13 @@ import tacos.data.OrderRepository;
 @SessionAttributes("tacoOrder")
 public class OrderController {
 
-    @Value("${taco.orders.pagesize:20")
-    private int pageSize;
-
-    public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
-    }
-
     private OrderRepository orderRepo;
-
-    public OrderController(OrderRepository orderRepo) {
+    private OrderProps props;
+    
+    public OrderController(OrderRepository orderRepo, OrderProps props) {
         this.orderRepo = orderRepo;
+        this.props = props;
+        System.out.println("=======" + props.getPageSize());
     }
 
     @GetMapping("/current")
@@ -66,8 +61,8 @@ public class OrderController {
 
     @GetMapping
     public String ordersForUser(@AuthenticationPrincipal User user, Model model) {
-        Pageable pageable = PageRequest.of(0, pageSize);
-        model.addAttribute("orders", orderRepo.findByUserOrderByPlacedAtDesc(user, pageable));
+        Pageable pageable = PageRequest.of(0, props.getPageSize());
+        model.addAttribute("orders",orderRepo.findByUserOrderByPlacedAtDesc(user, pageable));
         return "orderList";
     }
 

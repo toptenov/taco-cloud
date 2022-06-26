@@ -1,0 +1,49 @@
+spring:
+    profiles:
+        active:
+        - dev
+
+---
+
+taco:
+  orders:
+    pageSize: 10
+
+spring:
+    config:
+        activate:
+            on-profile: dev
+    datasource:
+        generate-unique-name: false
+        name: tacocloud
+    thymeleaf:
+        cache: false
+    jpa:
+        open-in-view: false
+
+logging:
+    file:
+        path: ./logs/
+        file: TacoCloud.log
+    level:
+        root: INFO
+        org:
+            springframework:
+                security: DEBUG
+        tacos: DEBUG
+
+---
+
+spring:
+    config:
+        activate:
+            on-profile: prod
+    datasource:
+        url: jdbc:mysql://localhost/tacocloud
+        username: tacouser
+        password: tacopassword
+    
+
+logging:
+    level:
+        tacos: WARN
