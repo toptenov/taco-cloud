@@ -2,6 +2,8 @@ spring:
     profiles:
         active:
         - dev
+    jpa:
+        open-in-view: true
 
 ---
 
@@ -18,8 +20,6 @@ spring:
         name: tacocloud
     thymeleaf:
         cache: false
-    jpa:
-        open-in-view: false
 
 logging:
     file:
