@@ -29,7 +29,7 @@ logging:
         root: INFO
         org:
             springframework:
-                security: DEBUG
+                security: INFO
         tacos: DEBUG
 
 ---

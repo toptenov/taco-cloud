@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <title>Taco Cloud</title>
+        <link rel="stylesheet" th:href="@{/styles.css}" />
+    </head>
+
+<body>
+
+    <h1 th:object="${user}">Orders of user: [[${user.username}]]</h1>
+    <img th:src="@{/images/TacoCloud.png}"/>
+
+    <table th:object="${orders}">
+        <tr>
+            <th>orderId</th>
+            <th>orderPlacedAt</th>
+            <th>deliveryName</th>
+            <th>deliveryStreet</th>
+            <th>deliveryCity</th>
+            <th>deliveryState</th>
+            <th>deliveryZip</th>
+        </tr>
+        <tr th:each="order : ${orders}">
+            <th th:text="${order.id}">id</th>
+            <th th:text="${order.placedAt}">placedAt</th>
+            <th th:text="${order.deliveryName}">deliveryName</th>
+            <th th:text="${order.deliveryStreet}">deliveryStreet</th>
+            <th th:text="${order.deliveryCity}">deliveryCity</th>
+            <th th:text="${order.deliveryState}">deliveryState</th>
+            <th th:text="${order.deliveryZip}">deliveryZip</th>
+        </tr>
+    </table>
+    
+</body>
+
+</html>

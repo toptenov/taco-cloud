@@ -1,5 +1,7 @@
 package tacos.web;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.data.domain.PageRequest;
@@ -32,7 +34,6 @@ public class OrderController {
     public OrderController(OrderRepository orderRepo, OrderProps props) {
         this.orderRepo = orderRepo;
         this.props = props;
-        System.out.println("=======" + props.getPageSize());
     }
 
     @GetMapping("/current")
@@ -60,10 +61,17 @@ public class OrderController {
     }
 
     @GetMapping
+    @PostAuthorize("hasRole('USER')")
     public String ordersForUser(@AuthenticationPrincipal User user, Model model) {
+
         Pageable pageable = PageRequest.of(0, props.getPageSize());
-        model.addAttribute("orders",orderRepo.findByUserOrderByPlacedAtDesc(user, pageable));
+        model.addAttribute("user", user);
+
+        List<TacoOrder> tacoOrders = orderRepo.findByUserOrderByPlacedAtDesc(user, pageable);
+        model.addAttribute("orders", tacoOrders);
+
         return "orderList";
+
     }
 
 }
