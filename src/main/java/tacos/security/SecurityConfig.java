@@ -33,12 +33,16 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
+        .authorizeRequests()
+        .antMatchers("/design", "/orders/**").access("hasRole('ROLE_USER')")
+        .antMatchers("/", "/**").access("permitAll")
+        .and()
         .formLogin().loginPage("/login").defaultSuccessUrl("/design", true)
         .and()
         .logout().logoutSuccessUrl("/")
         .and()
         .csrf().ignoringAntMatchers("/h2-console/**")
-        .and()  
+        .and()
         .headers().frameOptions().sameOrigin()
         .and()
         .build();

@@ -4,13 +4,21 @@
 xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<title>Taco Cloud</title>
+    <title>Taco Cloud</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" />
 </head>
 
 <body>
 
     <h1>Login</h1>
-    <img th:src="@{/images/TacoCloud.png}"/>
+    <img id="logo" th:src="@{/images/TacoCloud.png}"/>
+
+    <ul>
+        <li><a href="/">/home</a></li>
+        <li><a href="/design">/design</a></li>
+        <li><a href="/orders/current">/orders/current</a></li>
+        <li><a href="/orders">/orders</a></li>
+    </ul>
 
     <div th:if="${error}">Unable to login. Check your username and password.</div>
     <p>

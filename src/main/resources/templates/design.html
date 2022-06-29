@@ -10,7 +10,23 @@
 <body>
 
     <h1>Design your taco!</h1>
-    <img th:src="@{/images/TacoCloud.png}"/>
+    <img id="logo" th:src="@{/images/TacoCloud.png}"/>
+
+    <ul>
+        <li><a href="/">/home</a></li>
+        <li><a href="/design">/design</a></li>
+        <li><a href="/orders/current">/orders/current</a></li>
+        <li><a href="/orders">/orders</a></li>
+    </ul>
+
+    <form method="GET" th:action="@{/login}">
+        <input type="submit" value="Log in"/>
+    </form><br>
+
+    <form method="POST" th:action="@{/logout}">
+        <input type="submit" value="Log out"/>
+    </form><br>
+
     <form method="POST" th:action="@{/design}" th:object="${taco}">
 
         <div class="grid">
@@ -65,14 +81,6 @@
         </div>
 
     </form><br/>
-
-    <form method="GET" th:action="@{/login}">
-        <input type="submit" value="Log in"/>
-    </form><br>
-
-    <form method="POST" th:action="@{/logout}">
-        <input type="submit" value="Log out"/>
-    </form>
 
 </body>
 

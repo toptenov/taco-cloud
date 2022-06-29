@@ -9,10 +9,26 @@
 
 <body>
 
+    <h1>Order your taco creations!</h1>
+    <img id="logo" th:src="@{/images/TacoCloud.png}"/>
+
+    <ul>
+        <li><a href="/">/home</a></li>
+        <li><a href="/design">/design</a></li>
+        <li><a href="/orders/current">/orders/current</a></li>
+        <li><a href="/orders">/orders</a></li>
+    </ul>
+
+    <form method="GET" th:action="@{/login}">
+        <input type="submit" value="Log in"/>
+    </form><br>
+
+    <form method="POST" th:action="@{/logout}">
+        <input type="submit" value="Log out"/>
+    </form>
+
     <form method="POST" th:action="@{/orders}" th:object="${tacoOrder}">
 
-        <h1>Order your taco creations!</h1>
-        <img th:src="@{/images/TacoCloud.png}"/>
         <h3>Your tacos in this order:</h3>
         <a th:href="@{/design}" id="another">Design another taco</a><br/>
 
@@ -78,14 +94,6 @@
 
         <input type="submit" value="Submit Order"/>
 
-    </form><br/>
-
-    <form method="GET" th:action="@{/login}">
-        <input type="submit" value="Log in"/>
-    </form><br>
-
-    <form method="POST" th:action="@{/logout}">
-        <input type="submit" value="Log out"/>
     </form>
 
 </body>
