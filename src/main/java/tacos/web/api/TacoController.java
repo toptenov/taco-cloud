@@ -31,8 +31,9 @@ public class TacoController {
     private TacoRepository tacoRepo;
     private OrderRepository orderRepo;
 
-    public TacoController(TacoRepository tacoRepo) {
+    public TacoController(TacoRepository tacoRepo, OrderRepository orderRepo) {
         this.tacoRepo = tacoRepo;
+        this.orderRepo = orderRepo;
     }
 
     @GetMapping(params="recent")
@@ -57,7 +58,7 @@ public class TacoController {
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping(path="/orders", produces="application/json")
+    @GetMapping(path="/orders")
     public Iterable<TacoOrder> allOrders() {
         return orderRepo.findAll();
     }
@@ -74,7 +75,7 @@ public class TacoController {
 
     @PatchMapping(path="/{orderId}", consumes="application/json")
     public TacoOrder patchOrder(
-        @PathVariable("orderId") String orderId,
+        @PathVariable("orderId") Long orderId,
         @RequestBody TacoOrder patch) {
 
         TacoOrder order = orderRepo.findById(orderId).get();
@@ -117,7 +118,7 @@ public class TacoController {
 
     @DeleteMapping("/{orderId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteOrder(@PathVariable("orderId") String orderId) {
+    public void deleteOrder(@PathVariable("orderId") Long orderId) {
         try {
             orderRepo.deleteById(orderId);
         } catch (EmptyResultDataAccessException e) {}

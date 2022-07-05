@@ -7,10 +7,6 @@ spring:
 
 ---
 
-taco:
-  orders:
-    pageSize: 10
-
 spring:
     config:
         activate:
@@ -20,6 +16,10 @@ spring:
         name: tacocloud
     thymeleaf:
         cache: false
+
+taco:
+  orders:
+    pageSize: 10
 
 logging:
     file:

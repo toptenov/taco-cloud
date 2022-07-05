@@ -2,6 +2,7 @@ package tacos.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -31,7 +32,25 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    @Profile("dev")
+    public SecurityFilterChain devFilterChain(HttpSecurity http) throws Exception {
+        return http
+        .authorizeRequests()
+        .antMatchers("/design", "/orders/**").access("hasRole('ROLE_USER')")
+        .antMatchers("/", "/**").access("permitAll")
+        .and()
+        .formLogin().loginPage("/login").defaultSuccessUrl("/design", true)
+        .and()
+        .logout().logoutSuccessUrl("/")
+        .and()
+        .csrf().disable()
+        .cors().disable()
+        .build();
+    }
+
+    @Bean
+    @Profile("prod")
+    public SecurityFilterChain prodFilterChain(HttpSecurity http) throws Exception {
         return http
         .authorizeRequests()
         .antMatchers("/design", "/orders/**").access("hasRole('ROLE_USER')")
