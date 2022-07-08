@@ -7,11 +7,11 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.7.0</version>
+		<version>2.5.3</version>
 		<relativePath/>
 	</parent>
 	
-	<groupId>sia</groupId>
+	<groupId>toptenov</groupId>
 	<artifactId>taco-cloud</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>taco-cloud</name>

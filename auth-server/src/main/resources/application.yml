@@ -1,0 +1,6 @@
+server:
+    port: 9000
+
+spring:
+    jpa:
+        open-in-view: true

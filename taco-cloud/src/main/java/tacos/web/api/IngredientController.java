@@ -1,7 +1,7 @@
 package tacos.web.api;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +22,6 @@ public class IngredientController {
 
     private IngredientRepository ingredientRepo;
 
-    @Autowired
     public IngredientController(IngredientRepository ingredientRepo) {
         this.ingredientRepo = ingredientRepo;
     }
@@ -33,12 +32,14 @@ public class IngredientController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('USER')")
     @ResponseStatus(HttpStatus.CREATED)
     public Ingredient saveIngredient(@RequestBody Ingredient ingredient) {
         return ingredientRepo.save(ingredient);
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('USER')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteIngredient(@PathVariable("id") String ingredientId) {
         ingredientRepo.deleteById(ingredientId);
